@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context=".MainActivity">
+
+        <RelativeLayout
+            android:id="@+id/main_relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:paddingBottom="60dp">
+
+            <LinearLayout
+                android:id="@+id/main_day_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+
+                        android:gravity="end"
+                        android:text="@string/today" />
+
+                    <EditText
+                        android:id="@+id/main_today_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_weight="1"
+                        android:hint="дата"
+                        android:importantForAutofill="no"
+                        android:inputType="date"
+                        android:minHeight="50dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
+                    android:orientation="horizontal">
+
+                    <MultiAutoCompleteTextView
+                        android:id="@+id/main_order_set"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:minHeight="50dp"
+                        android:text="@string/order_type" />
+
+                    <EditText
+                        android:id="@+id/main_coeff"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_weight="1"
+                        android:hint="@string/coefficient"
+                        android:importantForAutofill="no"
+                        android:inputType="numberSigned"
+                        android:maxWidth="12sp"
+                        android:minHeight="50dp"
+                        android:textAlignment="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/main_comment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:gravity="top"
+                        android:hint="Коментарий"
+                        android:importantForAutofill="no"
+                        android:inputType="textMultiLine"
+                        android:lines="3"
+                        android:maxWidth="80sp" />
+
+                    <EditText
+                        android:id="@+id/main_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_weight="1"
+                        android:hint="Сумма"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:maxWidth="18sp"
+                        android:minHeight="50dp" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/main_btn_add"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:background="@drawable/btnpress"
+                    android:layout_marginVertical="20dp"
+                    android:onClick="add"
+                    android:text="@string/add_btn" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/main_day_table_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/main_day_ll"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="30dp"
+                android:text="@string/main_day_table_title"
+                android:textColor="#37474F" />
+
+            <TextView
+                android:id="@+id/main_day_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/main_day_ll"
+                android:layout_alignEnd="@id/main_day_ll"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="20dp"
+                android:maxWidth="100dp"
+                android:maxHeight="20dp"
+                android:text="TextView"
+                android:textColor="#37474F" />
+
+            <ListView
+                android:id="@+id/main_day_table"
+                android:layout_width="match_parent"
+
+                android:layout_below="@+id/main_day_table_title"
+                android:layout_marginVertical="10dp"
+                android:background="#e1e1d1"
+                android:layout_height="50dp">
+            </ListView>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageButton
+            android:id="@+id/nav_button_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@android:drawable/ic_menu_day"
+            android:backgroundTint="@android:color/transparent"
+            android:contentDescription="Главная" />
+
+        <ImageButton
+            android:id="@+id/nav_button_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@android:drawable/ic_menu_month"
+            android:backgroundTint="@android:color/transparent"
+            android:contentDescription="Текущий месяц" />
+
+        <ImageButton
+            android:id="@+id/nav_button_year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="?android:attr/actionModeFindDrawable"
+            android:backgroundTint="@android:color/transparent"
+            android:contentDescription="Сводка" />
+
+        <ImageButton
+            android:id="@+id/nav_button_preferences"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@android:drawable/ic_menu_manage"
+            android:backgroundTint="@android:color/transparent"
+            android:contentDescription="Настройки" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

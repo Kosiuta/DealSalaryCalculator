@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">FirstApp</string>
+    <string name="today">Сегодня</string>
+    <string name="order_type">Вид задания</string>
+    <string name="coefficient">½</string>
+    <string name="main_day_table_title">Выполненные задания за сегодня</string>
+    <string name="add_btn">Добавить</string>
+    <string name="edit_day">Редактировать день</string>
+</resources>
