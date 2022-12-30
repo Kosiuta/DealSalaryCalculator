@@ -11,11 +11,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.MultiAutoCompleteTextView;
 import android.widget.SimpleAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.time.LocalDate;
@@ -23,6 +25,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import slan.ru.models.MainPref;
 
 
 public class MainActivity extends AppCompatActivity{
@@ -43,17 +47,17 @@ public class MainActivity extends AppCompatActivity{
 
     EditText main_today_date, main_coeff, main_price, main_comment;
     TextView main_day_total;
-    MultiAutoCompleteTextView main_order_set;
+    Spinner main_order_set;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setNavButtons();
-        setDailyEt();
+        dbHelper = new DBHelper(this);
         dailyListData = new ArrayList<>();
 
-        dbHelper = new DBHelper(this);
+        setNavButtons();
+        setDailyEt(dbHelper.getReadableDatabase());
         setDailyList(dbHelper.getReadableDatabase());
 
     }
@@ -61,7 +65,9 @@ public class MainActivity extends AppCompatActivity{
     public void add(View view) {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        String order = main_order_set.getText().toString();
+
+        String order = main_order_set.getSelectedItem().toString();
+
         String money = main_price.getText().toString();
         String comment =  main_comment.getText().toString();
         values.put(DBHelper.KEY_DATE, format.format(date));
@@ -69,6 +75,7 @@ public class MainActivity extends AppCompatActivity{
         values.put(DBHelper.KEY_COEF, main_coeff.getText().toString());
         values.put(DBHelper.KEY_PAYMENT, money);
         values.put(DBHelper.KEY_COMMENT, comment);
+
 
         database.insert(DBHelper.TABLE_DAILY_NOTE, null, values);
         listItemData =  new HashMap<>();
@@ -122,7 +129,7 @@ public class MainActivity extends AppCompatActivity{
         database.close();
     }
 
-    private void setDailyEt() {
+    private void setDailyEt(SQLiteDatabase database) {
         main_daily_list = findViewById(R.id.main_day_table);
         main_today_date = findViewById(R.id.main_today_date);
         main_coeff = findViewById(R.id.main_coeff);
@@ -134,8 +141,25 @@ public class MainActivity extends AppCompatActivity{
         date = LocalDate.now();
         main_today_date.setText(format.format(date));
         main_coeff.setText("1/2");
-        main_price.setText(getResources().getString(R.string.app_name));
         rowHeight = main_daily_list.getLayoutParams().height + 3;
+
+        MainPref orderSet = new MainPref(database);
+        ArrayList<MainPref.PrefNote> list = orderSet.getOrderTypeList();
+        String[] m =(String[]) list.stream().map(MainPref.PrefNote::getKey).toArray(i -> new String[list.size()]);
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, m);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        main_order_set.setAdapter(spinnerAdapter);
+        main_order_set.setSelection(0);
+        main_order_set.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                main_price.setText(list.get(i).value);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
     }
 
     private void setNavButtons() {
@@ -145,8 +169,8 @@ public class MainActivity extends AppCompatActivity{
         nav_button_preferences = findViewById(R.id.nav_button_preferences);
         startNavButtons(nav_button_main, MainActivity.class);
         startNavButtons(nav_button_month, CurrentMonthActivity.class);
-        startNavButtons(nav_button_year, MainActivity.class);
-        startNavButtons(nav_button_preferences, MainActivity.class);
+        startNavButtons(nav_button_year, BrifActivity.class);
+        startNavButtons(nav_button_preferences, PreferencesActivity.class);
 
     }
     private void startNavButtons (View v, Class<? extends Activity> c) {
@@ -154,7 +178,6 @@ public class MainActivity extends AppCompatActivity{
             Intent intent = new Intent(MainActivity.this, c);
             startActivity(intent);
         });
-
     }
 
 }

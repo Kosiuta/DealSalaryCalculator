@@ -46,7 +46,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 KEY_DATE + " DATE, " +
                 KEY_WORK_DAY + " TEXT, " +
-                KEY_OFF_DAY + " TEXT, " +
                 KEY_EXPECTED_MS + " TEXT, " +
                 KEY_EXPECTED_MD + " TEXT, " +
                 KEY_FACT_MS + " TEXT, " +
@@ -55,27 +54,33 @@ public class DBHelper extends SQLiteOpenHelper {
                 KEY_PREF_NAME + " TEXT, " +
                 KEY_PREF_VALUE + " TEXT" + ")");
 
-        database.execSQL("INSERT INTO " + TABLE_PREFERENCES + " VALUES " +
-                "(tax, 0.13), "+
-                "(salary, 15300)," +
-                "(foreman, 0.00)," +
-                "(order_type, 'Подключение (оптика)500')," +
-                "(order_type, 'Подключение (радио)350')," +
-                "(order_type, 'Подключение (медь)350')," +
-                "(order_type, 'Дорога300')," +
-                "(order_type, 'Стройка линии007')," +
-                "(order_type, 'Монтаж муфты/бокса250')," +
-                "(order_type, 'Сварка волокна050')," +
-                "(order_type, 'Монтаж ТКД750')," +
-                "(order_type, 'Выезд (бесплатный)100')," +
-                "(order_type, 'Выезд (платный)125')," +
-                "(order_type, 'Конфиг дэвайса в аренде050')," +
-                "(order_type, 'Конфиг дэвайса абонента125')," +
-                "(order_type, 'Продажа/прокл. кабеля025')," +
-                "(order_type, 'Ремонт у абонента125')," +
-                "(order_type, 'Простой ремонт150')," +
-                "(order_type, 'Сложный ремонт250')," +
-                "(order_type, 'Сложный ремонт (оптика)400')"
+        database.execSQL("INSERT INTO " + TABLE_PREFERENCES + " ("+ KEY_PREF_NAME + ", " + KEY_PREF_VALUE +")" + " VALUES " +
+                "('tax', '0.13'), "+
+                "('salary', '15300'), " +
+                "('foreman', '0.00')," +
+                "('order_type', 'Подключение (оптика)500')," +
+                "('order_type', 'Подключение (радио)350')," +
+                "('order_type', 'Подключение (медь)350')," +
+                "('order_type', 'Дорога300')," +
+                "('order_type', 'Стройка линии007')," +
+                "('order_type', 'Подтяжка линии003')," +
+                "('order_type', 'Монтаж муфты/бокса250')," +
+                "('order_type', 'Сварка волокна050')," +
+                "('order_type', 'Монтаж ТКД750')," +
+                "('order_type', 'Выезд (бесплатный)100')," +
+                "('order_type', 'Выезд (платный)125')," +
+                "('order_type', 'Конфиг дэвайса в аренде050')," +
+                "('order_type', 'Конфиг дэвайса абонента125')," +
+                "('order_type', 'Продажа/прокл. кабеля025')," +
+                "('order_type', 'Продажа роутера105')," +
+                "('order_type', 'Ремонт у абонента125')," +
+                "('order_type', 'Монтаж розетки RJ-45062')," +
+                "('order_type', 'Монтаж коннектора037')," +
+                "('order_type', 'Простой ремонт150')," +
+                "('order_type', 'Сложный ремонт250')," +
+                "('order_type', 'Ремонт оптики у абона250')," +
+                "('order_type', 'Сложный ремонт (оптика)400')," +
+                "('order_type', 'Другое100')"
         );
     }
 

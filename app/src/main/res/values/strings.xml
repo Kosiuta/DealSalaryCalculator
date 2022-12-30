@@ -6,4 +6,22 @@
     <string name="main_day_table_title">Выполненные задания за сегодня</string>
     <string name="add_btn">Добавить</string>
     <string name="edit_day">Редактировать день</string>
+    <string name="btn_to_main">Главная</string>
+    <string name="btn_to_CM">Текущий месяц</string>
+    <string name="btn_to_brif">Сводка</string>
+    <string name="btn_to_pref">Настройки</string>
+    <string name="choose_month">Выбрать месяц</string>
+    <string name="brif">Сводка</string>
+    <string name="fact_MD">Фактическая сделка</string>
+    <string name="fact_MS">Фактический оклад</string>
+    <string name="expect_MS">Ожидаемый оклад</string>
+    <string name="expect_MD">Ожидаемая сделка</string>
+    <string name="expect_total">Ожидаемая ЗП</string>
+    <string name="fact_total">Фактическая ЗП</string>
+    <string name="comment">Коментарий</string>
+    <string name="preferences">Настройки</string>
+    <string name="salary">Оклад</string>
+    <string name="tax">Налог</string>
+    <string name="foreman">Бригадирские</string>
+    <string name="save">Сохранить</string>
 </resources>

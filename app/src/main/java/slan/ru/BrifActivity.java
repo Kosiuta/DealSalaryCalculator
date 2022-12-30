@@ -8,15 +8,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
-public class CurrentMonthActivity extends AppCompatActivity {
+public class BrifActivity extends AppCompatActivity {
 
     ImageButton nav_button_main, nav_button_month, nav_button_year, nav_button_preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_current_month);
-
+        setContentView(R.layout.activity_brif);
         setNavButtons();
     }
 
@@ -33,7 +32,7 @@ public class CurrentMonthActivity extends AppCompatActivity {
     }
     private void startNavButtons (View v, Class<? extends Activity> c) {
         v.setOnClickListener(view -> {
-            Intent intent = new Intent(CurrentMonthActivity.this, c);
+            Intent intent = new Intent(BrifActivity.this, c);
             startActivity(intent);
         });
     }

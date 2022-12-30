@@ -21,13 +21,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:paddingBottom="60dp">
+            android:paddingBottom="60dp"
+            android:background="@drawable/border">
 
             <LinearLayout
                 android:id="@+id/main_day_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:padding="10dp"
+                android:orientation="vertical"
+                android:background="@drawable/border">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -64,24 +67,25 @@
                     android:layout_marginVertical="10dp"
                     android:orientation="horizontal">
 
-                    <MultiAutoCompleteTextView
+                    <Spinner
                         android:id="@+id/main_order_set"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="3"
+                        android:layout_weight="2.5"
+                        android:contentDescription="@string/choose_month"
                         android:minHeight="50dp"
-                        android:text="@string/order_type" />
+                        android:prompt="@string/order_type" />
 
                     <EditText
                         android:id="@+id/main_coeff"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginEnd="20dp"
                         android:layout_weight="1"
                         android:hint="@string/coefficient"
                         android:importantForAutofill="no"
                         android:inputType="numberSigned"
-                        android:maxWidth="12sp"
+                        android:maxWidth="15dp"
                         android:minHeight="50dp"
                         android:textAlignment="center" />
                 </LinearLayout>
@@ -95,9 +99,10 @@
                         android:id="@+id/main_comment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:padding="5dp"
                         android:layout_weight="3"
                         android:gravity="top"
-                        android:hint="Коментарий"
+                        android:hint="@string/comment"
                         android:importantForAutofill="no"
                         android:inputType="textMultiLine"
                         android:lines="3"
@@ -108,6 +113,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
+                        android:gravity="center"
+                        android:textSize="18sp"
                         android:layout_weight="1"
                         android:hint="Сумма"
                         android:importantForAutofill="no"
@@ -155,7 +162,7 @@
             <ListView
                 android:id="@+id/main_day_table"
                 android:layout_width="match_parent"
-
+                android:layout_marginHorizontal="10dp"
                 android:layout_below="@+id/main_day_table_title"
                 android:layout_marginVertical="10dp"
                 android:background="#e1e1d1"
@@ -181,7 +188,8 @@
             android:layout_weight="1"
             app:srcCompat="@android:drawable/ic_menu_day"
             android:backgroundTint="@android:color/transparent"
-            android:contentDescription="Главная" />
+            android:contentDescription="@string/btn_to_main"
+           />
 
         <ImageButton
             android:id="@+id/nav_button_month"
@@ -190,7 +198,7 @@
             android:layout_weight="1"
             app:srcCompat="@android:drawable/ic_menu_month"
             android:backgroundTint="@android:color/transparent"
-            android:contentDescription="Текущий месяц" />
+            android:contentDescription="@string/btn_to_CM" />
 
         <ImageButton
             android:id="@+id/nav_button_year"
@@ -199,7 +207,7 @@
             android:layout_weight="1"
             app:srcCompat="?android:attr/actionModeFindDrawable"
             android:backgroundTint="@android:color/transparent"
-            android:contentDescription="Сводка" />
+            android:contentDescription="@string/btn_to_brif" />
 
         <ImageButton
             android:id="@+id/nav_button_preferences"
@@ -208,7 +216,7 @@
             android:layout_weight="1"
             app:srcCompat="@android:drawable/ic_menu_manage"
             android:backgroundTint="@android:color/transparent"
-            android:contentDescription="Настройки" />
+            android:contentDescription="@string/btn_to_pref" />
 
     </LinearLayout>
 
