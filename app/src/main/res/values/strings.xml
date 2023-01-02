@@ -20,8 +20,10 @@
     <string name="fact_total">Фактическая ЗП</string>
     <string name="comment">Коментарий</string>
     <string name="preferences">Настройки</string>
-    <string name="salary">Оклад</string>
-    <string name="tax">Налог</string>
-    <string name="foreman">Бригадирские</string>
+    <string name="salary">Оклад (руб)</string>
+    <string name="tax">Налог (%)</string>
+    <string name="foreman">Бригадирские (%)</string>
     <string name="save">Сохранить</string>
+    <string name="current_month">Текущий месяц</string>
+    <string name="save_month_salary">Сохранить месячый оклад</string>
 </resources>

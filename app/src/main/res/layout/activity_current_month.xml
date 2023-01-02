@@ -28,34 +28,44 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="TextView" />
+            android:text="@string/current_month" />
 
         <ListView
             android:id="@+id/month_statistic"
             android:layout_below="@+id/month_title"
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            android:background="@color/bg"/>
+            android:background="@drawable/border"/>
 
         <LinearLayout
             android:id="@+id/month_salary_container"
             android:layout_below="@+id/month_statistic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginVertical="10dp">
 
             <Button
                 android:id="@+id/enter_salary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Button" />
+                android:text="@string/save_month_salary"
+                android:layout_gravity="start"
+                android:background="@drawable/btnpress"
+                />
 
-            <TextView
+            <EditText
                 android:id="@+id/salary_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginStart="30dp"
+                android:autofillHints="0"
 
-                android:text="TextView" />
+                android:inputType="number"
+                android:maxWidth="80dp"
+                android:text="0"
+                tools:ignore="LabelFor,TouchTargetSizeCheck" />
         </LinearLayout>
 
         <TableLayout

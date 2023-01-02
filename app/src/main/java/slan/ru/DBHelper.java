@@ -55,9 +55,9 @@ public class DBHelper extends SQLiteOpenHelper {
                 KEY_PREF_VALUE + " TEXT" + ")");
 
         database.execSQL("INSERT INTO " + TABLE_PREFERENCES + " ("+ KEY_PREF_NAME + ", " + KEY_PREF_VALUE +")" + " VALUES " +
-                "('tax', '0.13'), "+
+                "('tax', '13'), "+
                 "('salary', '15300'), " +
-                "('foreman', '0.00')," +
+                "('foreman', '0')," +
                 "('order_type', 'Подключение (оптика)500')," +
                 "('order_type', 'Подключение (радио)350')," +
                 "('order_type', 'Подключение (медь)350')," +

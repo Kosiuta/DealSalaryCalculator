@@ -1,20 +1,34 @@
 package slan.ru.models;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import slan.ru.DBHelper;
 
 public class MainPref {
-    private ArrayList<PrefNote> orderTypeList;
-    private ArrayList<PrefNote> otherPreferences;
+    private static MainPref instance;
 
-    public MainPref ( SQLiteDatabase database) {
+    private ArrayList<PrefNote> orderTypeList;
+    private Map<String,String> otherPreferences;
+
+    public static synchronized MainPref getInstance(Context context) {
+        if (instance == null) {
+            instance = new MainPref(context);
+        }
+        return instance;
+    }
+
+    private MainPref (Context context) {
+        SQLiteDatabase database = new DBHelper(context).getWritableDatabase();
         orderTypeList = new ArrayList<>();
-        otherPreferences = new ArrayList<>();
+        otherPreferences = new HashMap<>();
         Cursor cursor = database.query(DBHelper.TABLE_PREFERENCES, new String[]{DBHelper.KEY_PREF_VALUE},
                 DBHelper.KEY_PREF_NAME + " = ?", new String[]{"order_type"}, null, null, null);
         if(cursor.moveToFirst()) {
@@ -33,8 +47,7 @@ public class MainPref {
             int prefNameIndex = cursor.getColumnIndex(DBHelper.KEY_PREF_NAME);
             int prefValueIndex = cursor.getColumnIndex(DBHelper.KEY_PREF_VALUE);
             do {
-                PrefNote note = new PrefNote(cursor.getString(prefNameIndex), cursor.getString(prefValueIndex));
-                otherPreferences.add(note);
+                otherPreferences.put(cursor.getString(prefNameIndex), cursor.getString(prefValueIndex));
             }while (cursor.moveToNext());
         }
 
@@ -45,7 +58,7 @@ public class MainPref {
     public ArrayList<PrefNote> getOrderTypeList() {
         return orderTypeList;
     }
-    public ArrayList<PrefNote> getOtherPreferences() {
+    public Map<String, String> getOtherPreferences() {
         return otherPreferences;
     }
 

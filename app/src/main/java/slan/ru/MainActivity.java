@@ -5,12 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -57,7 +60,7 @@ public class MainActivity extends AppCompatActivity{
         dailyListData = new ArrayList<>();
 
         setNavButtons();
-        setDailyEt(dbHelper.getReadableDatabase());
+        setDailyEt();
         setDailyList(dbHelper.getReadableDatabase());
 
     }
@@ -70,7 +73,8 @@ public class MainActivity extends AppCompatActivity{
 
         String money = main_price.getText().toString();
         String comment =  main_comment.getText().toString();
-        values.put(DBHelper.KEY_DATE, format.format(date));
+      //  values.put(DBHelper.KEY_DATE, format.format(date));
+        values.put(DBHelper.KEY_DATE, main_today_date.getText().toString());
         values.put(DBHelper.KEY_ORDER_TYPE, order);
         values.put(DBHelper.KEY_COEF, main_coeff.getText().toString());
         values.put(DBHelper.KEY_PAYMENT, money);
@@ -78,7 +82,7 @@ public class MainActivity extends AppCompatActivity{
 
 
         database.insert(DBHelper.TABLE_DAILY_NOTE, null, values);
-        listItemData =  new HashMap<>();
+        listItemData = new HashMap<>();
         listItemData.put(DBHelper.KEY_ORDER_TYPE, order);
         listItemData.put(DBHelper.KEY_PAYMENT, money);
         listItemData.put(DBHelper.KEY_COMMENT, comment);
@@ -87,9 +91,40 @@ public class MainActivity extends AppCompatActivity{
         main_daily_list.getLayoutParams().height += (rowHeight + 2);
         Toast toast = Toast.makeText(this,"Данные добавлены", Toast.LENGTH_SHORT);
         toast.show();
+        main_comment.setText("");
 
         main_day_total.setText(String.valueOf(Integer.parseInt(main_day_total.getText().toString()) + Integer.parseInt(money)));
 
+        String monthDate = format.format(date).substring(0,8) + "01";
+        Cursor cursor = database.query(DBHelper.TABLE_MONTHLY_NOTE,null, DBHelper.KEY_DATE + " = ? ", new String[]{monthDate},null,null,null);
+        if (cursor.moveToFirst()) {
+            int expectedDealIndex = cursor.getColumnIndex(DBHelper.KEY_EXPECTED_MD);
+            int expectedDeal = cursor.getInt(expectedDealIndex);
+            ContentValues value = new ContentValues();
+            value.put(DBHelper.KEY_EXPECTED_MD, String.valueOf(expectedDeal + Integer.parseInt(money)));
+            database.update(DBHelper.TABLE_MONTHLY_NOTE, value, DBHelper.KEY_DATE + " = ?", new String[]{monthDate});
+            cursor.close();
+        } else {
+            cursor.close();
+            createMonthNote(database, monthDate, money);
+        }
+
+        database.close();
+    }
+
+    private void createMonthNote(SQLiteDatabase database, String monthDate, String money) {
+
+        MainPref pref = MainPref.getInstance(MainActivity.this);
+
+
+        ContentValues values = new ContentValues();
+        values.put(DBHelper.KEY_DATE, monthDate);
+        values.put(DBHelper.KEY_WORK_DAY, "1");
+        values.put(DBHelper.KEY_EXPECTED_MS, pref.getOtherPreferences().get("salary"));
+        values.put(DBHelper.KEY_EXPECTED_MD, money);
+        values.put(DBHelper.KEY_FACT_MS, "0");
+        values.put(DBHelper.KEY_FACT_MD, "0");
+        database.insert(DBHelper.TABLE_MONTHLY_NOTE, null, values);
 
     }
 
@@ -123,13 +158,11 @@ public class MainActivity extends AppCompatActivity{
         ViewGroup.LayoutParams params = main_daily_list.getLayoutParams();
         params.height = cursor.getCount() * rowHeight;
 
-        Toast toast = Toast.makeText(this,"высота: " + rowHeight, Toast.LENGTH_SHORT);
-        toast.show();
         cursor.close();
         database.close();
     }
 
-    private void setDailyEt(SQLiteDatabase database) {
+    private void setDailyEt() {
         main_daily_list = findViewById(R.id.main_day_table);
         main_today_date = findViewById(R.id.main_today_date);
         main_coeff = findViewById(R.id.main_coeff);
@@ -143,9 +176,9 @@ public class MainActivity extends AppCompatActivity{
         main_coeff.setText("1/2");
         rowHeight = main_daily_list.getLayoutParams().height + 3;
 
-        MainPref orderSet = new MainPref(database);
+        MainPref orderSet = MainPref.getInstance(MainActivity.this);
         ArrayList<MainPref.PrefNote> list = orderSet.getOrderTypeList();
-        String[] m =(String[]) list.stream().map(MainPref.PrefNote::getKey).toArray(i -> new String[list.size()]);
+        String[] m = list.stream().map(MainPref.PrefNote::getKey).toArray(i -> new String[list.size()]);
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, m);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         main_order_set.setAdapter(spinnerAdapter);
@@ -178,6 +211,21 @@ public class MainActivity extends AppCompatActivity{
             Intent intent = new Intent(MainActivity.this, c);
             startActivity(intent);
         });
+    }
+
+    @Override
+    public boolean dispatchTouchEvent( MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            View v = getCurrentFocus();
+            if (v instanceof EditText) {
+                v.clearFocus();
+                InputMethodManager imm = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+
+            }
+        }
+
+        return super.dispatchTouchEvent(event);
     }
 
 }

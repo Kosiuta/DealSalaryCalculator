@@ -84,7 +84,7 @@
                         android:layout_weight="1"
                         android:hint="@string/coefficient"
                         android:importantForAutofill="no"
-                        android:inputType="numberSigned"
+                        android:inputType="text"
                         android:maxWidth="15dp"
                         android:minHeight="50dp"
                         android:textAlignment="center" />
