@@ -95,7 +95,8 @@ public class MainActivity extends AppCompatActivity{
 
         main_day_total.setText(String.valueOf(Integer.parseInt(main_day_total.getText().toString()) + Integer.parseInt(money)));
 
-        String monthDate = format.format(date).substring(0,8) + "01";
+//        String monthDate = format.format(date).substring(0,8) + "01";
+        String monthDate =  main_today_date.getText().toString().substring(0,8) + "01";
         Cursor cursor = database.query(DBHelper.TABLE_MONTHLY_NOTE,null, DBHelper.KEY_DATE + " = ? ", new String[]{monthDate},null,null,null);
         if (cursor.moveToFirst()) {
             int expectedDealIndex = cursor.getColumnIndex(DBHelper.KEY_EXPECTED_MD);
@@ -103,12 +104,10 @@ public class MainActivity extends AppCompatActivity{
             ContentValues value = new ContentValues();
             value.put(DBHelper.KEY_EXPECTED_MD, String.valueOf(expectedDeal + Integer.parseInt(money)));
             database.update(DBHelper.TABLE_MONTHLY_NOTE, value, DBHelper.KEY_DATE + " = ?", new String[]{monthDate});
-            cursor.close();
         } else {
-            cursor.close();
             createMonthNote(database, monthDate, money);
         }
-
+        cursor.close();
         database.close();
     }
 
@@ -131,7 +130,11 @@ public class MainActivity extends AppCompatActivity{
     private void setDailyList(SQLiteDatabase database) {
         Cursor cursor = database.query(DBHelper.TABLE_DAILY_NOTE, new String[] {
                 DBHelper.KEY_ID, DBHelper.KEY_ORDER_TYPE, DBHelper.KEY_PAYMENT, DBHelper.KEY_COMMENT},
-                DBHelper.KEY_DATE + " = ?",new String[]{format.format(date)},null,null,null);
+                DBHelper.KEY_DATE + " = ?",new String[]{
+
+//                      format.format(date)
+                        main_today_date.getText().toString()
+                },null,null,null);
         int sum = 0;
         if (cursor.moveToFirst()) {
             int orderIndex = cursor.getColumnIndex(DBHelper.KEY_ORDER_TYPE);

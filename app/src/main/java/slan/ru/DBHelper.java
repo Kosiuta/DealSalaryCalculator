@@ -20,7 +20,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String KEY_COMMENT = "comment";
 
     public static final String KEY_WORK_DAY = "days_in_work";
-    public static final String KEY_OFF_DAY = "days_off";
     public static final String KEY_EXPECTED_MS = "expected_month_salary";
     public static final String KEY_EXPECTED_MD = "expected_month_deal";
     public static final String KEY_FACT_MS = "fact_month_salary";

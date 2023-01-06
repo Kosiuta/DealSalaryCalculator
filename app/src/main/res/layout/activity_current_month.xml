@@ -35,6 +35,7 @@
             android:layout_below="@+id/month_title"
             android:layout_width="match_parent"
             android:layout_height="250dp"
+            android:paddingVertical="5dp"
             android:background="@drawable/border"/>
 
         <LinearLayout
@@ -49,23 +50,21 @@
                 android:id="@+id/enter_salary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/save_month_salary"
                 android:layout_gravity="start"
                 android:background="@drawable/btnpress"
-                />
+                android:onClick="setMonthSalary"
+                android:text="@string/save_month_salary" />
 
-            <EditText
-                android:id="@+id/salary_amount"
+            <TextView
+                android:id="@+id/deal_amount"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="end"
+                android:textSize="20sp"
                 android:layout_marginStart="30dp"
-                android:autofillHints="0"
-
-                android:inputType="number"
                 android:maxWidth="80dp"
                 android:text="0"
-                tools:ignore="LabelFor,TouchTargetSizeCheck" />
+                android:gravity="center"/>
         </LinearLayout>
 
         <TableLayout

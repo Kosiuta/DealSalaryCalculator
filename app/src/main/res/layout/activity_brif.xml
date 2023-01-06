@@ -42,7 +42,7 @@
                 android:layout_weight="4"
                 android:contentDescription="@string/choose_month"
                 android:gravity="start"
-                android:minHeight="50dp" />
+                android:minHeight="50dp"/>
 
         </LinearLayout>
 
