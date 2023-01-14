@@ -7,14 +7,14 @@
     tools:context=".PreferencesActivity">
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="65dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="65dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -60,7 +60,7 @@
 
             </TableRow>
 
-                <TableRow
+            <TableRow
                 android:background="@drawable/table">
                 <TextView
                     android:layout_weight="1"
@@ -70,27 +70,27 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                    <EditText
-                        android:id="@+id/pref_tax"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.5"
-                        android:autofillHints="13"
-                        android:inputType="number"
-                        android:minHeight="48dp"
-                        tools:ignore="LabelFor,SpeakableTextPresentCheck" />
+                <EditText
+                    android:id="@+id/pref_tax"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:autofillHints="13"
+                    android:inputType="number"
+                    android:minHeight="48dp"
+                    tools:ignore="LabelFor,SpeakableTextPresentCheck" />
 
                 </TableRow>
 
                 <TableRow
                 android:background="@drawable/table">
-                <TextView
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:text="@string/foreman"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="@string/foreman"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
                     <EditText
                         android:id="@+id/pref_foreman"
@@ -104,6 +104,7 @@
 
                 </TableRow>
             </TableLayout>
+
             <Button
                 android:id="@+id/pref_btn_save"
                 android:layout_width="150dp"
@@ -115,20 +116,20 @@
                 android:text="@string/save" />
         </LinearLayout>
 
-            <LinearLayout
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border"
+            android:layout_margin="10dp">
+
+            <ListView
+                android:id="@+id/pref_list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/border"
-                android:layout_margin="10dp">
-
-                <ListView
-                    android:id="@+id/pref_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-            </LinearLayout>
+                android:layout_height="match_parent" />
 
         </LinearLayout>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

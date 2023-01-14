@@ -10,7 +10,6 @@
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -174,10 +173,11 @@
     </ScrollView>
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:background="@color/bg"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -186,37 +186,36 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@android:drawable/ic_menu_day"
             android:backgroundTint="@android:color/transparent"
             android:contentDescription="@string/btn_to_main"
-           />
+            app:srcCompat="@android:drawable/ic_menu_day" />
 
         <ImageButton
             android:id="@+id/nav_button_month"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@android:drawable/ic_menu_month"
             android:backgroundTint="@android:color/transparent"
-            android:contentDescription="@string/btn_to_CM" />
+            android:contentDescription="@string/btn_to_CM"
+            app:srcCompat="@android:drawable/ic_menu_month" />
 
         <ImageButton
             android:id="@+id/nav_button_year"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="?android:attr/actionModeFindDrawable"
             android:backgroundTint="@android:color/transparent"
-            android:contentDescription="@string/btn_to_brif" />
+            android:contentDescription="@string/btn_to_brif"
+            app:srcCompat="?android:attr/actionModeFindDrawable" />
 
         <ImageButton
             android:id="@+id/nav_button_preferences"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@android:drawable/ic_menu_manage"
             android:backgroundTint="@android:color/transparent"
-            android:contentDescription="@string/btn_to_pref" />
+            android:contentDescription="@string/btn_to_pref"
+            app:srcCompat="@android:drawable/ic_menu_manage" />
 
     </LinearLayout>
 

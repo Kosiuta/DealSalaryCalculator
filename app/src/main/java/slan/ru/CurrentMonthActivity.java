@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -37,6 +39,7 @@ public class CurrentMonthActivity extends AppCompatActivity {
     DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     Set<String> daysCount;
     ArrayList<Map<String, String>> currentListData;
+    ArrayList<String> ids;
     Map<String, String> listItemData;
     LocalDate date;
     SimpleAdapter adapter;
@@ -103,13 +106,16 @@ public class CurrentMonthActivity extends AppCompatActivity {
         if (cursor.moveToFirst()) {
             int orderIndex = cursor.getColumnIndex(DBHelper.KEY_ORDER_TYPE);
             int payIndex = cursor.getColumnIndex(DBHelper.KEY_PAYMENT);
+            int idIndex = cursor.getColumnIndex(DBHelper.KEY_ID);
             currentListData = new ArrayList<>();
+            ids = new ArrayList<>();
             do {
                 listItemData = new HashMap<>();
                 int money = cursor.getInt(payIndex);
                 listItemData.put(DBHelper.KEY_ORDER_TYPE, cursor.getString(orderIndex));
                 listItemData.put(DBHelper.KEY_PAYMENT, String.valueOf(money));
                 currentListData.add(listItemData);
+                ids.add(cursor.getString(idIndex));
                 sum += money;
             }while (cursor.moveToNext());
         }
@@ -120,11 +126,32 @@ public class CurrentMonthActivity extends AppCompatActivity {
 
         adapter = new SimpleAdapter(this, currentListData, R.layout.current_month_order_list_item, from, to);
         current_day_list.setAdapter(adapter);
+        registerForContextMenu(current_day_list);
 
         cursor.close();
         database.close();
     }
 
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.add(0,1,0, R.string.delete_note);
+    }
+
+    public boolean onContextItemSelected (MenuItem item) {
+        if (item.getItemId() == 1) {
+            AdapterView.AdapterContextMenuInfo acmi =(AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+            SQLiteDatabase database = dbHelper.getWritableDatabase();
+            database.delete(DBHelper.TABLE_DAILY_NOTE, DBHelper.KEY_ID + " = " + ids.get((int)acmi.id), null);
+            Toast toast = Toast.makeText(this,"Данные удалены. Запись " + ids.get((int)acmi.id), Toast.LENGTH_LONG);
+            toast.show();
+            currentListData.remove((int) acmi.id);
+            ids.remove((int) acmi.id);
+            adapter.notifyDataSetChanged();
+            database.close();
+            return true;
+        }
+        return super.onContextItemSelected(item);
+    }
 
     private void setCurrentMonthBrif(SQLiteDatabase database) {
         date = LocalDate.now();

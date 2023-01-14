@@ -27,4 +27,5 @@
     <string name="current_month">Текущий месяц</string>
     <string name="save_month_salary">Сохранить месячый оклад</string>
     <string name="chose_day">Выбрать день</string>
+    <string name="delete_note">Удалить запись</string>
 </resources>
