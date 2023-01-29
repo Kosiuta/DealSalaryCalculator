@@ -12,7 +12,7 @@ import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
+
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
@@ -25,8 +25,10 @@ import android.widget.Toast;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
+import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
+
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -160,7 +162,7 @@ public class CurrentMonthActivity extends AppCompatActivity {
         days[0] = date.format(format).substring(0,8) + "01";
         days[1] = date.format(format).substring(0,8) + date.getMonth().maxLength();
         ArrayList<Map<String,String>> ordersBrifList = new ArrayList<>();
-        daysCount = new TreeSet<>();
+        daysCount = new TreeSet<>(Comparator.reverseOrder());
         Cursor cursor = database.query(DBHelper.TABLE_DAILY_NOTE, new String[]{DBHelper.KEY_DATE, DBHelper.KEY_ORDER_TYPE,
                 DBHelper.KEY_PAYMENT},DBHelper.KEY_DATE + " BETWEEN ? AND ? ", days,null,null,null);
 

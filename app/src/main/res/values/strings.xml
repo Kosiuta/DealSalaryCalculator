@@ -11,7 +11,6 @@
     <string name="btn_to_brif">Сводка</string>
     <string name="btn_to_pref">Настройки</string>
     <string name="choose_month">Выбрать месяц</string>
-    <string name="brif">Сводка</string>
     <string name="fact_MD">Фактическая сделка</string>
     <string name="fact_MS">Фактический оклад</string>
     <string name="expect_MS">Ожидаемый оклад</string>
@@ -28,4 +27,5 @@
     <string name="save_month_salary">Сохранить месячый оклад</string>
     <string name="chose_day">Выбрать день</string>
     <string name="delete_note">Удалить запись</string>
+    <string name="price_default">Стоимость по умолчанию</string>
 </resources>

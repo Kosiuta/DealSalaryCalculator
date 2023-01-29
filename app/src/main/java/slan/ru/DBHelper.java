@@ -77,7 +77,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "('order_type', 'Монтаж коннектора037')," +
                 "('order_type', 'Простой ремонт150')," +
                 "('order_type', 'Сложный ремонт250')," +
-                "('order_type', 'Ремонт оптики у абона250')," +
+                "('order_type', 'Ремонт оптики у абона375')," +
                 "('order_type', 'Сложный ремонт (оптика)400')," +
                 "('order_type', 'Другое100')"
         );

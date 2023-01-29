@@ -119,8 +119,20 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:background="@drawable/border"
             android:layout_margin="10dp">
+
+            <Button
+                android:id="@+id/pref_btn_add"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/btnpress"
+                android:onClick="addPref"
+                android:text="@string/add_btn" />
 
             <ListView
                 android:id="@+id/pref_list"
