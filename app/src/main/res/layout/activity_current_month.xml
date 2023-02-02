@@ -28,12 +28,15 @@
 
         <ListView
             android:id="@+id/month_statistic"
-            android:layout_below="@+id/month_title"
             android:layout_width="match_parent"
             android:layout_height="350dp"
-            android:paddingTop="5dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/border"/>
+            android:layout_below="@+id/month_title"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/border"
+            android:paddingVertical="5dp" />
 
         <LinearLayout
             android:id="@+id/month_salary_container"

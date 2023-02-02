@@ -77,13 +77,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                <EditText
+                <TextView
                     android:id="@+id/brif_fact_salary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:autofillHints="0"
-                    android:inputType="number"
+                    android:clickable="true"
+                    android:onClick="setFactAmount"
+                    android:hint="@string/enter"
                     tools:ignore="LabelFor,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
             </TableRow>
@@ -97,13 +99,15 @@
                     android:text="@string/fact_MD"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
-                <EditText
+                <TextView
                     android:id="@+id/brif_fact_deal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:autofillHints="0"
-                    android:inputType="number"
+                    android:clickable="true"
+                    android:hint="@string/enter"
+                    android:onClick="setFactAmount"
                     tools:ignore="LabelFor,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
             </TableRow>

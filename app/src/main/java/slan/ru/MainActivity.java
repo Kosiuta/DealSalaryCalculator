@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity{
     Map<String, String> listItemData;
     int rowHeight;
 
+
     ImageButton nav_button_main, nav_button_month, nav_button_year, nav_button_preferences;
     ListView main_daily_list;
 
@@ -58,6 +60,7 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
         dbHelper = new DBHelper(this);
         dailyListData = new ArrayList<>();
+
 
         setNavButtons();
         setDailyEt();
@@ -121,8 +124,8 @@ public class MainActivity extends AppCompatActivity{
         values.put(DBHelper.KEY_WORK_DAY, "1");
         values.put(DBHelper.KEY_EXPECTED_MS, pref.getOtherPreferences().get("salary"));
         values.put(DBHelper.KEY_EXPECTED_MD, money);
-        values.put(DBHelper.KEY_FACT_MS, "0");
-        values.put(DBHelper.KEY_FACT_MD, "0");
+        values.put(DBHelper.KEY_FACT_MS, "");
+        values.put(DBHelper.KEY_FACT_MD, "");
         database.insert(DBHelper.TABLE_MONTHLY_NOTE, null, values);
 
     }
@@ -230,5 +233,61 @@ public class MainActivity extends AppCompatActivity{
 
         return super.dispatchTouchEvent(event);
     }
+//    ---------------------------------------------------------------------------------
+    float fromPosition, toPosition;
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event)
+    {
+        fromPosition = 0f;
+        toPosition = 0f;
+        switch (event.getAction())
+        {
+            case MotionEvent.ACTION_DOWN: // Пользователь нажал на экран, т.е. начало движения
+                // fromPosition - координата по оси X начала выполнения операции
+                fromPosition = event.getX();
+                break;
+            case MotionEvent.ACTION_UP: // Пользователь отпустил экран, т.е. окончание движения
+                toPosition = event.getX();
+                if (fromPosition > toPosition) {
+                    Intent intent = new Intent(MainActivity.this, CurrentMonthActivity.class);
+                    startActivity(intent);
+                }
+
+                else if (fromPosition < toPosition) {
+                    Intent intent = new Intent(MainActivity.this, PreferencesActivity.class);
+                    startActivity(intent);
+                }
+            default:
+                break;
+        }
+        return true;
+    }
+
+//    @Override
+//    public boolean onTouchEvent(MotionEvent event) {
+//        return gestureDetector.onTouchEvent(event);
+//    }
+//
+//    GestureDetector.SimpleOnGestureListener simpleOnGestureListener = new GestureDetector.SimpleOnGestureListener() {
+//
+//        @Override
+//        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
+//                               float velocityY) {
+//
+//            float sensitvity = 50;
+//            if ((e1.getX() - e2.getX()) > sensitvity) {
+//                Intent intent = new Intent(MainActivity.this, CurrentMonthActivity.class);
+//                startActivity(intent);
+//            } else if ((e2.getX() - e1.getX()) > sensitvity) {
+//                Intent intent = new Intent(MainActivity.this, PreferencesActivity.class);
+//                startActivity(intent);
+//            }
+//            return true;
+//        }
+//    };
+//
+//    GestureDetector gestureDetector = new GestureDetector(getBaseContext(),
+//            simpleOnGestureListener);
 
 }

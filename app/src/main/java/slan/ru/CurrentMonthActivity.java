@@ -10,7 +10,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.ContextMenu;
+import android.view.GestureDetector;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 
 import android.widget.AdapterView;
@@ -50,7 +52,6 @@ public class CurrentMonthActivity extends AppCompatActivity {
     TextView deal_amount, current_day_total;
     ImageButton nav_button_main, nav_button_month, nav_button_year, nav_button_preferences;
     DBHelper dbHelper;
-
 
     ListView month_brif, current_day_list;
 
@@ -239,4 +240,28 @@ public class CurrentMonthActivity extends AppCompatActivity {
         database.update(DBHelper.TABLE_MONTHLY_NOTE, values, DBHelper.KEY_DATE + " = ?",
                 new String[]{format.format(date).substring(0,8)+"01"});
     }
+
+//    @Override
+//    public boolean onTouchEvent(MotionEvent event) {
+//
+//        return gestureDetector.onTouchEvent(event);
+//    }
+//    GestureDetector.SimpleOnGestureListener simpleOnGestureListener = new GestureDetector.SimpleOnGestureListener() {
+//
+//        @Override
+//        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
+//                               float velocityY) {
+//
+//            float sensitvity = 50;
+//            if ((e1.getX() - e2.getX()) > sensitvity) {
+//                Intent intent = new Intent(CurrentMonthActivity.this, BrifActivity.class);
+//                startActivity(intent);
+//            } else if ((e2.getX() - e1.getX()) > sensitvity) {
+//                Intent intent = new Intent(CurrentMonthActivity.this, MainActivity.class);
+//                startActivity(intent);
+//            }
+//            return true;
+//        }
+//    };
+//    GestureDetector gestureDetector = new GestureDetector(getBaseContext(), simpleOnGestureListener);
 }
